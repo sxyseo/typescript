@@ -74,6 +74,8 @@ source-map-loader使用ts输出的sourcemap文件来告诉webpack何时生成自
 
 关于更多js类库我们可以到 `https://github.com/DefinitelyTyped/DefinitelyTyped` 这里去找，这个我已经star了，你呢？
 
+![demo](https://github.com/ar-insect/typescript/blob/master/demo/demo.png)
+
 参考:
 
 `https://zhongsp.gitbooks.io/typescript-handbook/content/index.html`
