@@ -7,11 +7,22 @@ interface ListViewOptions {
     el: string;
     events: any;
 }
+interface ListViewInterface {
+    addItem(): void;
+    render(): void;
+    renderItems(): void;
+}
 interface ItemViewOptions {
     tagName?: string; // default `div`
     className?: string; // default ''
     events: any; // must
     model: any; // must
+}
+interface ItemViewInterface {
+    render(): void;
+    edit(): void;
+    del(): void;
+    confirm(): void;
 }
 interface ItemModelOptions {
     text: string;
@@ -31,7 +42,7 @@ class ListItemCollection extends Backbone.Collection {
     }
 }
 
-class ListView extends Backbone.View {
+class ListView extends Backbone.View implements ListViewInterface {
     el: any;
     $el: any;
     viewItems: any[];
@@ -68,7 +79,7 @@ class ListView extends Backbone.View {
     }
 }
 
-class ItemView extends Backbone.View {
+class ItemView extends Backbone.View implements ItemViewInterface {
     model: any;
     cid: string;
     el: any;
