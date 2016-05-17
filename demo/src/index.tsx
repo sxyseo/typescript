@@ -128,8 +128,9 @@ class ItemModel extends Backbone.Model {
     }
 }
 
-let coll = new ListItemCollection({model: ItemModel});
-
-let listView = new ListView({el: '#list', events: {'click .add': 'addItem'}});
+let coll: ListItemCollection;
+let listView: ListView;
+coll = new ListItemCollection({model: ItemModel});
+listView = new ListView({el: '#list', events: {'click .add': 'addItem'}});
 
 

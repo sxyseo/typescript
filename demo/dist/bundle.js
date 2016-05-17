@@ -138,8 +138,10 @@
 	    }
 	    return ItemModel;
 	}(Backbone.Model));
-	var coll = new ListItemCollection({ model: ItemModel });
-	var listView = new ListView({ el: '#list', events: { 'click .add': 'addItem' } });
+	var coll;
+	var listView;
+	coll = new ListItemCollection({ model: ItemModel });
+	listView = new ListView({ el: '#list', events: { 'click .add': 'addItem' } });
 
 
 /***/ },
