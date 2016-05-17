@@ -72,5 +72,5 @@ source-map-loader使用ts输出的sourcemap文件来告诉webpack何时生成自
 
 之所以用backbone而不是react是因为我觉得bb更加接近与原生js的表诉，而对于初学ts的来讲再合适不过了。
 
-关于更多js类库我们可以到https://github.com/DefinitelyTyped/DefinitelyTyped这里去找，这个我已经star了，你呢？
+关于更多js类库我们可以到 `https://github.com/DefinitelyTyped/DefinitelyTyped` 这里去找，这个我已经star了，你呢？
 
