@@ -66,9 +66,9 @@ source-map-loader使用ts输出的sourcemap文件来告诉webpack何时生成自
 
 因为这里我们用到了backbone，所以我们使用typings工具来获取Backbone的声明文件：
 
-`typings install backbone --ambient --save`
+`typings install --global --save dt~backbone`
 
---ambient标记告诉typings从DefinitelyTyped获取声明文件，这是由社区维护的.d.ts文件仓库，这个命令会创建一个名为typings.json的文件和一个typings目录在当前目录下。
+--global dt~标记告诉typings从DefinitelyTyped获取声明文件，这是由社区维护的.d.ts文件仓库，这个命令会创建一个名为typings.json的文件和一个typings目录在当前目录下。
 
 之所以用backbone而不是react是因为我觉得bb更加接近与原生js的表诉，而对于初学ts的来讲再合适不过了。
 
