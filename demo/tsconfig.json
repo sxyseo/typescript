@@ -12,6 +12,7 @@
     ],
     "files": [
         "./typings/main.d.ts",
-        "./src/index.tsx"
+        "./src/index.tsx",
+        "./src/react.tsx"
     ]
 }
