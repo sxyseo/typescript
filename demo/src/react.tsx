@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { DialogComponent } from "./components/dialog";
+import { DialogComponent } from "./components/dialog/dialog";
 
 function Dialog(config: {trigger: string, title: string, message: string}) {
     let props = config;

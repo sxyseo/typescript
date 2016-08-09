@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
     entry: {
         index: "./src/index.tsx",
-        dialog: "./src/dialog.tsx"
+        react: "./src/react.tsx"
     },
     output: {
         path: 'dist',

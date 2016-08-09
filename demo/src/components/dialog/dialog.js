@@ -5,7 +5,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var React = require("react");
-require('../styles/dialog.scss');
+require('./dialog.scss');
 var DialogComponent = (function (_super) {
     __extends(DialogComponent, _super);
     function DialogComponent(props) {
