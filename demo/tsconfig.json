@@ -13,6 +13,6 @@
     "files": [
         "./typings/main.d.ts",
         "./src/index.tsx",
-        "./src/react.tsx"
+        "./src/dialog.tsx"
     ]
 }

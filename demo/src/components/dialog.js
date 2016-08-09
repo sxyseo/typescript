@@ -5,13 +5,35 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var React = require("react");
+require('../styles/dialog.scss');
 var DialogComponent = (function (_super) {
     __extends(DialogComponent, _super);
-    function DialogComponent() {
-        _super.apply(this, arguments);
+    function DialogComponent(props) {
+        _super.call(this);
+        this.state = { item: null, show: false };
+        document.getElementById(props.trigger).addEventListener('click', this.show.bind(this), false);
     }
+    DialogComponent.prototype.show = function (e) {
+        e.preventDefault();
+        this.setState({ show: true });
+    };
+    DialogComponent.prototype.close = function (e) {
+        e.preventDefault();
+        this.setState({ show: false });
+    };
     DialogComponent.prototype.render = function () {
-        return <h1>Hello from {this.props.compiler} and {this.props.framework}!</h1>;
+        return (<div className="dialog" style={{ display: this.state.show === false ? 'none' : 'block' }}>
+                <div className="dialog-overlayer">
+                    <div className="dialog-box">
+                        <div className="dialog-head">
+                            <a href="javascript:;" className="dialog-close" onClick={this.close.bind(this)}>X</a>
+                            {this.props.title}
+                        </div>
+                        <div className="dialog-content">{this.props.message}</div>
+                        <div className="dialog-foot"></div>
+                    </div>
+                </div>
+            </div>);
     };
     return DialogComponent;
 }(React.Component));

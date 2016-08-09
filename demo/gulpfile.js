@@ -5,6 +5,6 @@ var gulpConnect = require('gulp-connect');
 gulp.task('server', function () {
 	gulpConnect.server({
 		root: '',
-		port: 8888
+		port: 8800
 	});
 });

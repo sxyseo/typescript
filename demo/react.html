@@ -5,9 +5,25 @@
     <title>Hello React!</title>
 </head>
 <body>
-<div id="example"></div>
+<script>
+    (function(global){
+        var dpr = global.devicePixelRatio;
+        var $html = document.documentElement;
+        $html.setAttribute('data-dpr', dpr);
+        global.dpr = dpr;
 
+        function updateWinFontSize(){
+            var width = document.body.clientWidth;
+            global.remUnit = width / 15;
+            $html.style.fontSize = global.remUnit + 'px';
+        }
+        updateWinFontSize();
+        global.addEventListener('resize', updateWinFontSize, false);
+    })(window);
+</script>
+<div id="ui-dialog"></div>
+<a href="#" id="J-dialog">对话框</a>
 <!-- Main -->
-<script src="./dist/react.bundle.js"></script>
+<script src="./dist/dialog.bundle.js"></script>
 </body>
 </html>
