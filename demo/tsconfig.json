@@ -1,18 +1,16 @@
 {
     "compilerOptions": {
-        "jsx": "react",
-        "outDir": "./dist",
-        "sourceMap": true,
-        "noImplicitAny": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
         "module": "commonjs",
+        "noEmitHelpers": true,
+        "removeComments": true,
+        "sourceMap": true,
         "target": "es5"
     },
+
     "exclude": [
-        "node_modules"
-    ],
-    "files": [
-        "./typings/main.d.ts",
-        "./src/index.tsx",
-        "./src/react.tsx"
+        "node_modules",
+        "tmp"
     ]
 }
