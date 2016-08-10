@@ -1,6 +1,34 @@
+#---------------------------------
+# Directories
+#---------------------------------
+**/node_modules/
+coverage/
+target/
+tmp/
+typings/
+
+
+#---------------------------------
+# Extensions
+#---------------------------------
+*.gz
+*.log
+*.rar
+*.tar
+*.zip
+
+
+#---------------------------------
+# IDE generated
+#---------------------------------
 .idea/
-node_modules/
-*/.DS_Store
+.project
+*.iml
+
+
+#---------------------------------
+# OS generated
+#---------------------------------
+__MACOSX/
 .DS_Store
-Ds_store
-dist/
+Thumbs.db
