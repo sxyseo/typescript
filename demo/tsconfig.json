@@ -1,8 +1,10 @@
 {
     "compilerOptions": {
+        "jsx": "react",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "module": "commonjs",
+        "noImplicitAny": true,
         "noEmitHelpers": true,
         "removeComments": true,
         "sourceMap": true,

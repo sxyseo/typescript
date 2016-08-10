@@ -29,7 +29,7 @@ module.exports = config;
 
 
 config.resolve = {
-    extensions: ['', '.ts', '.js'],
+    extensions: ['', '.ts', 'tsx', '.js'],
     modulesDirectories: ['node_modules'],
     root: path.resolve('.')
 };
@@ -37,8 +37,9 @@ config.resolve = {
 config.module = {
     loaders: [
         {test: /\.ts$/, loader: 'ts', exclude: /node_modules/},
+        {test: /\.tsx?$/, loader: 'ts', exclude: /node_modules/},
         {test: /\.html$/, loader: 'raw'},
-        {test: /\.scss$/, loader: 'raw!postcss!sass', exclude: path.resolve('src/views/common/styles'), include: path.resolve('src/views')}
+        {test: /\.scss$/, loader: 'raw!postcss!sass', /*exclude: path.resolve('src/views/common/styles'),*/ include: path.resolve('src/styles')}
     ]
 };
 
@@ -64,9 +65,9 @@ config.sassLoader = {
 //-------------------------------------
 if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
     config.entry = {
-        main: ['./src/main.ts'],
-        polyfills: './src/polyfills.ts',
-        vendor: './src/vendor.ts'
+        main: ['./src/index.tsx'],
+        /*polyfills: './src/polyfills.ts',
+        vendor: './src/vendor.ts'*/
     };
 
     config.output = {
@@ -76,12 +77,12 @@ if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
     };
 
     config.plugins.push(
-        new webpack.optimize.CommonsChunkPlugin({
+        /*new webpack.optimize.CommonsChunkPlugin({
             name: ['vendor', 'polyfills'],
             minChunks: Infinity
-        }),
+        }),*/
         new CopyWebpackPlugin([
-            {from: './src/assets', to: 'assets'}
+            {from: './src/image', to: 'image'}
         ]),
         new HtmlWebpackPlugin({
             chunkSortMode: 'dependency',
@@ -103,7 +104,7 @@ if (ENV_DEVELOPMENT) {
     config.entry.main.unshift(`webpack-dev-server/client?http://${HOST}:${PORT}`);
 
     config.module.loaders.push(
-        {test: /\.scss$/, loader: 'style!css!postcss!sass', include: path.resolve('src/views/common/styles')}
+        {test: /\.scss$/, loader: 'style!css!postcss!sass', include: path.resolve('src/styles')}
     );
 
     config.devServer = {
@@ -137,7 +138,7 @@ if (ENV_PRODUCTION) {
     config.output.filename = '[name].[chunkhash].js';
 
     config.module.loaders.push(
-        {test: /\.scss$/, loader: ExtractTextPlugin.extract('css?-autoprefixer!postcss!sass'), include: path.resolve('src/views/common/styles')}
+        {test: /\.scss$/, loader: ExtractTextPlugin.extract('css?-autoprefixer!postcss!sass'), include: path.resolve('src/styles')}
     );
 
     config.plugins.push(
@@ -164,7 +165,7 @@ if (ENV_TEST) {
     config.devtool = 'inline-source-map';
 
     config.module.loaders.push(
-        {test: /\.scss$/, loader: 'style!css!postcss!sass', include: path.resolve('src/views/common/styles')}
+        {test: /\.scss$/, loader: 'style!css!postcss!sass', include: path.resolve('src/styles')}
     );
 
     if (argv.coverage) {
