@@ -1,4 +1,12 @@
-# Typescript Webpack Seed
+# React Typescript Webpack
+
+- React
+- Jasmine
+- Karma
+- SASS
+- Typescript
+- Webpack
+- Webpack Development Server
 
 #### Prerequisites
 - `node >=5.12`
