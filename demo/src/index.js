@@ -6,15 +6,9 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var _ = require("underscore");
 var Backbone = require("backbone");
-var ListItemCollection = (function (_super) {
-    __extends(ListItemCollection, _super);
-    function ListItemCollection(options) {
-        _super.call(this, options);
-    }
-    return ListItemCollection;
-}(Backbone.Collection));
 var ListView = (function (_super) {
     __extends(ListView, _super);
+    // listenTo: any;
     function ListView(options) {
         _super.call(this, options);
     }
@@ -41,7 +35,6 @@ var ListView = (function (_super) {
     };
     ListView.prototype.render = function () {
         //console.log('rerender');
-        // console.log(coll);
     };
     ListView.prototype.renderItems = function () {
         this.$el.find('ul').append(arguments[0]);
@@ -87,11 +80,20 @@ var ItemView = (function (_super) {
 }(Backbone.View));
 var ItemModel = (function (_super) {
     __extends(ItemModel, _super);
+    // set: any;
+    // get: any;
     function ItemModel(options) {
         _super.call(this, options);
     }
     return ItemModel;
 }(Backbone.Model));
+var ListItemCollection = (function (_super) {
+    __extends(ListItemCollection, _super);
+    function ListItemCollection(options) {
+        _super.call(this, options);
+    }
+    return ListItemCollection;
+}(Backbone.Collection));
 var coll;
 var listView;
 coll = new ListItemCollection({ model: ItemModel });

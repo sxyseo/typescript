@@ -65,7 +65,7 @@ config.sassLoader = {
 //-------------------------------------
 if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
     config.entry = {
-        main: ['./src/index.tsx'],
+        index: ['./src/index.tsx'],
         /*polyfills: './src/polyfills.ts',
         vendor: './src/vendor.ts'*/
     };
@@ -101,7 +101,7 @@ if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
 if (ENV_DEVELOPMENT) {
     config.devtool = 'cheap-module-source-map';
 
-    config.entry.main.unshift(`webpack-dev-server/client?http://${HOST}:${PORT}`);
+    config.entry.index.unshift(`webpack-dev-server/client?http://${HOST}:${PORT}`);
 
     config.module.loaders.push(
         {test: /\.scss$/, loader: 'style!css!postcss!sass', include: path.resolve('src/styles')}

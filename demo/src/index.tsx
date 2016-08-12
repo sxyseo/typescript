@@ -2,6 +2,7 @@ import * as $ from "jquery";
 import * as _ from "underscore";
 import * as Backbone from "backbone";
 
+
 // backbone demo.
 interface ListViewOptions {
     el: string;
@@ -31,22 +32,11 @@ interface ListItemCollectionOptions {
     model: any;
 }
 
-class ListItemCollection extends Backbone.Collection {
-    push: any;
-    add: any;
-    get: any;
-    remove: any;
-    length: number;
-    constructor(options:ListItemCollectionOptions) {
-        super(options);
-    }
-}
-
-class ListView extends Backbone.View implements ListViewInterface {
+class ListView extends Backbone.View<Backbone.Model> implements ListViewInterface {
     el: any;
     $el: any;
     viewItems: any[];
-    listenTo: any;
+    // listenTo: any;
     constructor(options: ListViewOptions) {
         super(options);
     }
@@ -72,7 +62,6 @@ class ListView extends Backbone.View implements ListViewInterface {
     }
     render() {
         //console.log('rerender');
-        // console.log(coll);
     }
     renderItems() {
         this.$el.find('ul').append(arguments[0]);
@@ -121,9 +110,21 @@ class ItemView extends Backbone.View implements ItemViewInterface {
 }
 
 class ItemModel extends Backbone.Model {
-    set: any;
-    get: any;
+    // set: any;
+    // get: any;
     constructor(options: ItemModelOptions) {
+        super(options);
+    }
+}
+
+class ListItemCollection extends Backbone.Collection {
+    model: ItemModel;
+    push: any;
+    add: any;
+    get: any;
+    remove: any;
+    length: number;
+    constructor(options:ListItemCollectionOptions) {
         super(options);
     }
 }
@@ -132,5 +133,4 @@ let coll: ListItemCollection;
 let listView: ListView;
 coll = new ListItemCollection({model: ItemModel});
 listView = new ListView({el: '#list', events: {'click .add': 'addItem'}});
-
 
