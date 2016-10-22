@@ -2,6 +2,7 @@ import * as $ from "jquery";
 import * as _ from "underscore";
 import * as Backbone from "backbone";
 
+/*
 
 // backbone demo.
 interface ListViewOptions {
@@ -133,4 +134,5 @@ let coll: ListItemCollection;
 let listView: ListView;
 coll = new ListItemCollection({model: ItemModel});
 listView = new ListView({el: '#list', events: {'click .add': 'addItem'}});
+*/
 

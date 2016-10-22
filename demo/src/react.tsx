@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { DialogComponent } from "./components/dialog/dialog";
+import { DialogComponent } from "./components/dialog";
 
 function Dialog(config: {trigger: string, title: string, message: string}) {
     let props = config;
@@ -10,7 +10,6 @@ function Dialog(config: {trigger: string, title: string, message: string}) {
         document.getElementById("ui-dialog")
     );
 }
-
 Dialog({
     trigger: 'J-dialog',
     title: 'dialog',

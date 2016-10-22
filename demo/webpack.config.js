@@ -7,7 +7,6 @@ const path = require('path');
 const webpack = require('webpack');
 const WebpackMd5Hash = require('webpack-md5-hash');
 
-
 //=========================================================
 //  ENVIRONMENT VARS
 //---------------------------------------------------------
@@ -27,9 +26,8 @@ const PORT = process.env.PORT || 3000;
 const config = {};
 module.exports = config;
 
-
 config.resolve = {
-    extensions: ['', '.ts', 'tsx', '.js'],
+    extensions: ['', '.ts', '.tsx', '.js'],
     modulesDirectories: ['node_modules'],
     root: path.resolve('.')
 };
@@ -38,8 +36,8 @@ config.module = {
     loaders: [
         {test: /\.ts$/, loader: 'ts', exclude: /node_modules/},
         {test: /\.tsx?$/, loader: 'ts', exclude: /node_modules/},
-        {test: /\.html$/, loader: 'raw'},
-        {test: /\.scss$/, loader: 'raw!postcss!sass', /*exclude: path.resolve('src/views/common/styles'),*/ include: path.resolve('src/styles')}
+        // {test: /\.html$/, loader: 'raw'},
+        {test: /\.scss$/, loader: 'raw!postcss!sass', exclude: path.resolve('src/components/'), include: path.resolve('src/styles/')}
     ]
 };
 
@@ -66,34 +64,35 @@ config.sassLoader = {
 if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
     config.entry = {
         index: ['./src/index.tsx'],
-        /*polyfills: './src/polyfills.ts',
-        vendor: './src/vendor.ts'*/
+        timePicker: './src/timePicker.tsx',
     };
 
     config.output = {
         filename: '[name].js',
         path: path.resolve('./target'),
-        publicPath: '/'
+        publicPath: '/',
     };
 
     config.plugins.push(
-        /*new webpack.optimize.CommonsChunkPlugin({
-            name: ['vendor', 'polyfills'],
-            minChunks: Infinity
-        }),*/
         new CopyWebpackPlugin([
-            {from: './src/image', to: 'image'}
+            {from: './src/assets', to: 'assets'}
         ]),
         new HtmlWebpackPlugin({
-            chunkSortMode: 'dependency',
-            filename: 'index.html',
-            hash: false,
-            inject: 'body',
-            template: './src/index.html'
+            files: {
+              'css': ['src/styles/reset.scss']
+            },
+            filename: 'timePicker.html',
+            template: 'src/timePicker.html',
+            hash: true,
+            chunks: ['timePicker'],
+            title: 'timePicker'
+        }),
+        new HtmlWebpackPlugin({
+            hash: true,
+            chunks: ['index']
         })
     );
 }
-
 
 //=====================================
 //  DEVELOPMENT
@@ -104,7 +103,7 @@ if (ENV_DEVELOPMENT) {
     config.entry.index.unshift(`webpack-dev-server/client?http://${HOST}:${PORT}`);
 
     config.module.loaders.push(
-        {test: /\.scss$/, loader: 'style!css!postcss!sass', include: path.resolve('src/styles')}
+        {test: /\.scss$/, loader: 'style!css!postcss!sass', include: path.resolve('src/styles/reset')}
     );
 
     config.devServer = {
@@ -138,14 +137,14 @@ if (ENV_PRODUCTION) {
     config.output.filename = '[name].[chunkhash].js';
 
     config.module.loaders.push(
-        {test: /\.scss$/, loader: ExtractTextPlugin.extract('css?-autoprefixer!postcss!sass'), include: path.resolve('src/styles')}
+        {test: /\.scss$/, loader: ExtractTextPlugin.extract('css?-autoprefixer!postcss!sass'), include: path.resolve('src/styles/reset')}
     );
 
     config.plugins.push(
         new WebpackMd5Hash(),
         new ExtractTextPlugin('styles.[contenthash].css'),
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin({
+        new webpack.optimize.DedupePlugin()
+        /*new webpack.optimize.UglifyJsPlugin({
             mangle: true,
             compress: {
                 dead_code: true, // eslint-disable-line camelcase
@@ -153,7 +152,7 @@ if (ENV_PRODUCTION) {
                 unused: true,
                 warnings: false
             }
-        })
+        })*/
     );
 }
 
@@ -165,7 +164,7 @@ if (ENV_TEST) {
     config.devtool = 'inline-source-map';
 
     config.module.loaders.push(
-        {test: /\.scss$/, loader: 'style!css!postcss!sass', include: path.resolve('src/styles')}
+        {test: /\.scss$/, loader: 'style!css!postcss!sass'}
     );
 
     if (argv.coverage) {

@@ -9,7 +9,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 var React = require("react");
 var ReactDOM = require("react-dom");
-var dialog_1 = require("./components/dialog/dialog");
+var dialog_1 = require("./components/dialog");
 function Dialog(config) {
     var props = config;
     ReactDOM.render(<dialog_1.DialogComponent {...props}/>, document.getElementById("ui-dialog"));
