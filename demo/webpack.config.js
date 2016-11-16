@@ -63,6 +63,7 @@ if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
     config.entry = {
         index: ['./src/index.tsx'],
         timePicker: './src/timePicker.tsx',
+        react: './src/react.tsx'
     };
 
     config.output = {
@@ -81,6 +82,13 @@ if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
             hash: true,
             chunks: ['timePicker'],
             title: 'timePicker'
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'react.html',
+            template: 'src/react.html',
+            hash: true,
+            chunks: ['react'],
+            title: 'react'
         }),
         new HtmlWebpackPlugin({
             hash: true,

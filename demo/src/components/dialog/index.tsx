@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import './dialog.scss';
+import './index.scss';
 
 interface propsInterface {
     [index: string]: string;
