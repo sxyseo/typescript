@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var React = require("react");
 var ReactDOM = require("react-dom");
 var timePicker_1 = require("./components/timePicker");
-// import './styles/reset.scss';
+require('./styles/reset.scss');
 var CustimizeList = (function (_super) {
     __extends(CustimizeList, _super);
     function CustimizeList() {

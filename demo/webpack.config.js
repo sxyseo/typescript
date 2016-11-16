@@ -36,7 +36,7 @@ config.module = {
         {test: /\.ts$/, loader: 'ts', exclude: /node_modules/},
         {test: /\.tsx?$/, loader: 'ts', exclude: /node_modules/},
         // {test: /\.html$/, loader: 'raw'},
-        {test: /\.scss$/, loader: 'raw!postcss!sass', /*exclude: path.resolve('src/styles/'), */include: path.resolve('src/')}
+        //{test: /\.scss$/, loader: 'raw!postcss!sass', exclude: path.resolve('src/styles/'), include: path.resolve('src/')}
     ]
 };
 
@@ -98,7 +98,7 @@ if (ENV_DEVELOPMENT) {
     config.entry.index.unshift(`webpack-dev-server/client?http://${HOST}:${PORT}`);
 
     config.module.loaders.push(
-        {test: /\.scss$/, loader: 'style!css!postcss!sass', include: path.resolve('src/components/timePicker/')}
+        {test: /\.scss$/, loader: 'style!css!postcss!sass', include: [path.resolve('src/styles/'), path.resolve('src/components/')]}
     );
 
     config.devServer = {

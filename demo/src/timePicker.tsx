@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { TimePicker } from "./components/timePicker";
-// import './styles/reset.scss';
+import './styles/reset.scss';
 
 export class CustimizeList extends React.Component<any, any> {
     constructor() {
