@@ -1,5 +1,5 @@
 const argv = require('yargs').argv;
-const autoprefixer = require('autoprefixer');
+const AutoPreFixer = require('autoprefixer');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -19,7 +19,6 @@ const ENV_TEST = NODE_ENV === 'test';
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 3000;
 
-
 //=========================================================
 //  CONFIG
 //---------------------------------------------------------
@@ -37,7 +36,7 @@ config.module = {
         {test: /\.ts$/, loader: 'ts', exclude: /node_modules/},
         {test: /\.tsx?$/, loader: 'ts', exclude: /node_modules/},
         // {test: /\.html$/, loader: 'raw'},
-        {test: /\.scss$/, loader: 'raw!postcss!sass', exclude: path.resolve('src/components/'), include: path.resolve('src/styles/')}
+        {test: /\.scss$/, loader: 'raw!postcss!sass', /*exclude: path.resolve('src/styles/'), */include: path.resolve('src/')}
     ]
 };
 
@@ -48,7 +47,7 @@ config.plugins = [
 ];
 
 config.postcss = [
-    autoprefixer({ browsers: ['last 3 versions'] })
+    AutoPreFixer({ browsers: ['last 3 versions'] })
 ];
 
 config.sassLoader = {
@@ -56,7 +55,6 @@ config.sassLoader = {
     precision: 10,
     sourceComments: false
 };
-
 
 //=====================================
 //  DEVELOPMENT or PRODUCTION
@@ -78,9 +76,6 @@ if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
             {from: './src/assets', to: 'assets'}
         ]),
         new HtmlWebpackPlugin({
-            files: {
-              'css': ['src/styles/reset.scss']
-            },
             filename: 'timePicker.html',
             template: 'src/timePicker.html',
             hash: true,
@@ -103,7 +98,7 @@ if (ENV_DEVELOPMENT) {
     config.entry.index.unshift(`webpack-dev-server/client?http://${HOST}:${PORT}`);
 
     config.module.loaders.push(
-        {test: /\.scss$/, loader: 'style!css!postcss!sass', include: path.resolve('src/styles/reset')}
+        {test: /\.scss$/, loader: 'style!css!postcss!sass', include: path.resolve('src/components/timePicker/')}
     );
 
     config.devServer = {
@@ -127,7 +122,6 @@ if (ENV_DEVELOPMENT) {
     };
 }
 
-
 //=====================================
 //  PRODUCTION
 //-------------------------------------
@@ -137,14 +131,14 @@ if (ENV_PRODUCTION) {
     config.output.filename = '[name].[chunkhash].js';
 
     config.module.loaders.push(
-        {test: /\.scss$/, loader: ExtractTextPlugin.extract('css?-autoprefixer!postcss!sass'), include: path.resolve('src/styles/reset')}
+        {test: /\.scss$/, loader: ExtractTextPlugin.extract('css?-autoprefixer!postcss!sass'), include: path.resolve('src/')}
     );
 
     config.plugins.push(
         new WebpackMd5Hash(),
         new ExtractTextPlugin('styles.[contenthash].css'),
-        new webpack.optimize.DedupePlugin()
-        /*new webpack.optimize.UglifyJsPlugin({
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.UglifyJsPlugin({
             mangle: true,
             compress: {
                 dead_code: true, // eslint-disable-line camelcase
@@ -152,10 +146,9 @@ if (ENV_PRODUCTION) {
                 unused: true,
                 warnings: false
             }
-        })*/
+        })
     );
 }
-
 
 //=====================================
 //  TEST

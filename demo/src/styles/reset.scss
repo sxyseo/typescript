@@ -1,43 +1,43 @@
 html {
   color: #000;
-  background: #FFF
+  background: #FFF;
 }
 
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, menu {
   margin: 0;
-  padding: 0
+  padding: 0;
 }
 
 table {
   border-collapse: collapse;
-  border-spacing: 0
+  border-spacing: 0;
 }
 
 fieldset, img {
-  border: 0
+  border: 0;
 }
 
 ol, ul {
-  list-style: none
+  list-style: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-size: 100%;
-  font-weight: 400
+  font-weight: 400;
 }
 
 input, textarea, select {
   font-family: inherit;
   font-size: inherit;
-  font-weight: inherit
+  font-weight: inherit;
 }
 
 legend {
-  color: #000
+  color: #000;
 }
 
 i {
-  font-style: normal
+  font-style: normal;
 }
 
 html, body {
@@ -60,13 +60,13 @@ a, div {
 
 a, a:active, a:hover {
   //color: #0057af;
-  text-decoration: none
+  text-decoration: none;
 }
 
 input:focus, li:focus, span:focus, i:focus, img:focus, button:focus {
-  outline: 0
+  outline: 0;
 }
 
 input[type=text], input[type=password], input[type=submit], button, textarea {
-  -webkit-appearance: none
+  -webkit-appearance: none;
 }
