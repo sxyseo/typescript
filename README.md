@@ -33,3 +33,7 @@ Usage
 |`npm run test:watch`|Run unit tests with Karma and Jasmine; watch for changes to re-run tests|
 |`npm run typings`|Install ambient typings|
 |`npm version`|Bump package.json version, generate CHANGELOG.md, git commit and tag (see [npm version](https://docs.npmjs.com/cli/version))|
+
+#### Demo
+
+The Demo is development by Backbone.
