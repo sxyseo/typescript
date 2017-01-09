@@ -1,0 +1,35 @@
+.user {
+    position: relative;
+    padding: 0 0 10px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #ddd;
+    &:last-child {
+        border-bottom: 0 none;
+    }
+    .user-item {
+        padding: 5px 0;
+        .first-name {
+            color: red;
+        }
+        .last-name {
+            color: #333;
+        }
+        &.user-item.oprator {
+            position: absolute;
+            right: 0;
+            top: 0;
+            .edit {
+                background: #dcdcdc;
+            }
+            .del {
+                background: red;
+                color: #fff;
+            }
+            .confirm {
+                background: green;
+                color: #fff;
+            }
+        }
+    }
+
+}

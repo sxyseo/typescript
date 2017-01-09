@@ -33,8 +33,8 @@ config.resolve = {
 
 config.module = {
     loaders: [
-        {test: /\.ts$/, loader: 'ts', exclude: /node_modules/},
-        {test: /\.tsx?$/, loader: 'ts', exclude: /node_modules/},
+        {test: /\.ts|\.tsx?$/, loader: 'ts', exclude: /node_modules/},
+        //{test: /\.tsx?$/, loader: 'ts', exclude: /node_modules/},
         // {test: /\.html$/, loader: 'raw'},
         //{test: /\.scss$/, loader: 'raw!postcss!sass', exclude: path.resolve('src/styles/'), include: path.resolve('src/')}
     ]
@@ -61,9 +61,9 @@ config.sassLoader = {
 //-------------------------------------
 if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
     config.entry = {
-        index: ['./src/index.tsx'],
-        timePicker: './src/timePicker.tsx',
-        react: './src/react.tsx'
+        index: ['./src/index.ts'],
+        //timePicker: './src/timePicker.tsx',
+        //react: './src/react.tsx'
     };
 
     config.output = {
@@ -76,6 +76,7 @@ if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
         new CopyWebpackPlugin([
             {from: './src/assets', to: 'assets'}
         ]),
+        /*
         new HtmlWebpackPlugin({
             filename: 'timePicker.html',
             template: 'src/timePicker.html',
@@ -89,8 +90,10 @@ if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
             hash: true,
             chunks: ['react'],
             title: 'react'
-        }),
+        }),*/
         new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: 'src/index.html',
             hash: true,
             chunks: ['index']
         })
