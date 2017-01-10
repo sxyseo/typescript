@@ -6,13 +6,40 @@
     &:last-child {
         border-bottom: 0 none;
     }
+    &.editing {
+        background: #efefef;
+        box-shadow: 2px 3px 8px #ccc;
+        
+    }
     .user-item {
         padding: 5px 0;
+        em {
+            display: inline-block;
+            margin-right: 5px;
+            width: 100px;
+            text-align: right;
+        }
+        span {
+            display: inline-block;
+            margin: 0 5px;
+        }
+        .error {
+            background: #ddd;
+            border: 2px solid red;
+        }
+        .error-tip {
+            color: red;
+            padding-left: 110px;
+            padding-top: 5px;
+        }
         .first-name {
             color: red;
         }
         .last-name {
             color: #333;
+        }
+        .input-email {
+            width: 160px;
         }
         &.user-item.oprator {
             position: absolute;

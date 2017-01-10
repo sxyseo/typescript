@@ -27,8 +27,8 @@ export default class UserListView extends Backbone.View<Backbone.Model> implemen
     initialize() {
         this.$el.append( underscore.template('<a href="#" class="add">添加用户</a>')() );
         this.viewItems = [
-            new UserView({ model: new UserModel({firstName: 'AR', lastName: 'Insect', email: 'ar.insect@gmail.com'}), tagName: 'li', className: 'user', events: { 'click .edit': 'edit', 'click .del': 'delete', 'click .confirm': 'confirm' }}),
-            new UserView({ model: new UserModel({firstName: 'JSON.~', email: 'JSON1988@gmail.com'}), tagName: 'li', className: 'user', events: { 'click .edit': 'edit', 'click .del': 'delete', 'click .confirm': 'confirm' }})
+            new UserView({ model: new UserModel({firstName: 'AR', lastName: 'Insect', email: 'ar.insect@gmail.com', sex: '男'}), tagName: 'li', className: 'user', events: { 'click .edit': 'edit', 'click .del': 'delete', 'click .confirm': 'confirm' }}),
+            new UserView({ model: new UserModel({firstName: 'JSON.~', email: 'JSON1988@gmail.com', sex: '女'}), tagName: 'li', className: 'user', events: { 'click .edit': 'edit', 'click .del': 'delete', 'click .confirm': 'confirm' }})
         ];
         for (let item of this.viewItems) {
             this.listenTo(item, 'renderUser', this.renderUser);
