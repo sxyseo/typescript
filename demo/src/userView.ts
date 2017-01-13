@@ -27,23 +27,36 @@ export default class UserView extends Backbone.View<UserModel> implements UserVi
     }
     initialize() {
         let tpl: string[] = [
-            //'<div class="user-item"><em>用户id：</em><span>' + this.cid + '</span></div>',
-            '<div class="user-item"><em>用户名：' + '</em>',
-            '<span class="first-name">' + this.model.get('firstName') + '</span>',
-            '<span class="last-name">' + (this.model.get('lastName') || '--') + '</span>',
-            '<p class="error-tip"></p></div>',
-            '<div class="user-item"><em>性别：</em>',
-            '<span class="sex">' + (this.model.get('sex') || '--') + '</span>',
-            '<p class="error-tip"></p></div>',
-            '<div class="user-item"><em>生日：</em>',
-            '<span class="birthday">' + (this.model.get('birthday') || '--') + '</span>',
-            '<p class="error-tip"></p></div>',
-            '<div class="user-item"><em>邮箱：</em>',
-            '<span class="email">' + (this.model.get('email') || '--') + '</span>', 
-            '<p class="error-tip"></p></div>',
-            '<div class="user-item oprator"><a class="button edit" href="#">编辑</a><a class="button confirm" style="display:none" href="#">确认</a><a class="button del" href="#">删除</a></div>'
+            '<div class="user-item">',
+                '<em>用户名：' + '</em>',
+                '<span class="first-name"><%=firstName%></span>',
+                '<span class="last-name"><%=lastName%></span>',
+                '<p class="error-tip"></p>',
+            '</div>',
+            '<div class="user-item">',
+                '<em>性别：</em>',
+                '<span class="sex"><%=sex%></span>',
+                '<p class="error-tip"></p>', 
+            '</div>',
+            '<div class="user-item">',
+                '<em>生日：</em>',
+                '<span class="birthday"><%=birthday%></span>',
+                '<p class="error-tip"></p>', 
+            '</div>',
+            '<div class="user-item">', 
+                '<em>邮箱：</em>',
+                '<span class="email"><%=email%></span>', 
+                '<p class="error-tip"></p>', 
+            '</div>',
+            '<div class="user-item oprator">', 
+                '<a class="button edit" href="#">编辑</a>',
+                '<a class="button confirm" style="display:none" href="#">确认</a>',
+                '<a class="button del" href="#">删除</a>', 
+            '</div>'
         ];
+        // 初始化先定义好模板对象
         this.template = underscore.template(tpl.join(''));
+        // 用户模型需要绑定数据验证，保证在set之前调用
         this.model.on('invalid', (model: UserModel, error: string[]) => {
             this.onValidate(error);
         });
@@ -68,10 +81,18 @@ export default class UserView extends Backbone.View<UserModel> implements UserVi
             this.$el.find('.email input').addClass('error');
         }
     }
-    render() {
-        this.trigger('renderUser', this.$el.html(this.template())); // 通知外层view渲染dom
+    render(userList?: any) {
+        let data = {
+            firstName: this.model.get('firstName') || '--',
+            lastName: this.model.get('lastName') || '--',
+            sex: this.model.get('sex') || '--',
+            birthday: this.model.get('birthday') || '--',
+            email: this.model.get('email') || '--'
+        };
+        userList.append(this.$el.html(this.template(data)));
         return this;
     }
+    
     edit() {
         this.$el.addClass('editing');
         this.$el.find('.edit').hide();
@@ -105,6 +126,6 @@ export default class UserView extends Backbone.View<UserModel> implements UserVi
     }
     delete() {
         userCollection.remove(userCollection.get(this.model.cid));
-        this.el.parentNode.removeChild(this.el);
+        this.remove();
     }
 }
