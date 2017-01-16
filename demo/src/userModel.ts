@@ -1,6 +1,6 @@
 import Backbone = require('backbone');
 
-interface UserModelOptions {
+export interface UserModelOptions {
     firstName: string;
     lastName?: string;
     sex?: string;

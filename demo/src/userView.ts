@@ -125,7 +125,8 @@ export default class UserView extends Backbone.View<UserModel> implements UserVi
         }
     }
     delete() {
-        userCollection.remove(userCollection.get(this.model.cid));
+        let model: UserModel = userCollection.get(this.model.cid);
+        userCollection.remove(model);
         this.remove();
     }
 }
