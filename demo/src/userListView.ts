@@ -24,18 +24,16 @@ let json = Mock.mock_json;
 export default class UserListView extends Backbone.View<Backbone.Model> implements UserListViewInterface {
     el: any;
     $el: any;
-    //userViewItems: UserView[];
     constructor(options: UserListViewOptions<UserModel>) {
         super(options);
     }
     initialize() {
-        this.$el.append( underscore.template('<a href="#" class="add">添加用户</a>')() );
-
         if (json.is_ok === true) {
             for (let item of json.data) {
                 this.createUserView(item);
             }
         }
+        this.render();
     }
     createUserView(data: UserModelOptions): UserView {
         let model: UserModel = new UserModel(data);
@@ -56,6 +54,7 @@ export default class UserListView extends Backbone.View<Backbone.Model> implemen
         userCollection.push(userView.model);
     }
     render() {
+        this.$el.append( underscore.template('<a href="#" class="add">添加用户</a>')() );
         return this;
     }
 }

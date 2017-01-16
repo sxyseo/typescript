@@ -56,6 +56,7 @@ export default class UserView extends Backbone.View<UserModel> implements UserVi
         ];
         // 初始化先定义好模板对象
         this.template = underscore.template(tpl.join(''));
+        this.on('editing', this.editing);
         // 用户模型需要绑定数据验证，保证在set之前调用
         this.model.on('invalid', (model: UserModel, error: string[]) => {
             this.onValidate(error);
@@ -92,16 +93,29 @@ export default class UserView extends Backbone.View<UserModel> implements UserVi
         userList.append(this.$el.html(this.template(data)));
         return this;
     }
-    
+    editing(status: boolean) {
+        if (status) {
+            this.$el.addClass('editing');
+            this.$el.find('.edit').hide();
+            this.$el.find('.confirm').show();
+            this.$el.find('.first-name').html('<input type="text" value="' + (this.model.get('firstName') || '') + '">');
+            this.$el.find('.last-name').html('<input type="text" value="' + (this.model.get('lastName') || '') + '">');
+            this.$el.find('.sex').html('<input type="text" value="' + (this.model.get('sex') || '') + '">');
+            this.$el.find('.birthday').html('<input type="text" value="' + (this.model.get('birthday') || '') + '">');
+            this.$el.find('.email').html('<input type="text" class="input-email" value="' + (this.model.get('email') || '') + '">');
+        } else {
+            this.$el.removeClass('editing');
+            this.$el.find('.edit').show();
+            this.$el.find('.confirm').hide();
+            this.$el.find('.first-name').html(this.model.get('firstName')  || '--');
+            this.$el.find('.last-name').html(this.model.get('lastName')  || '--');
+            this.$el.find('.sex').html(this.model.get('sex')  || '--');
+            this.$el.find('.birthday').html(this.model.get('birthday') || '--');
+            this.$el.find('.email').html(this.model.get('email')  || '--');
+        }
+    }
     edit() {
-        this.$el.addClass('editing');
-        this.$el.find('.edit').hide();
-        this.$el.find('.confirm').show();
-        this.$el.find('.first-name').html('<input type="text" value="' + (this.model.get('firstName') || '') + '">');
-        this.$el.find('.last-name').html('<input type="text" value="' + (this.model.get('lastName') || '') + '">');
-        this.$el.find('.sex').html('<input type="text" value="' + (this.model.get('sex') || '') + '">');
-        this.$el.find('.birthday').html('<input type="text" value="' + (this.model.get('birthday') || '') + '">');
-        this.$el.find('.email').html('<input type="text" class="input-email" value="' + (this.model.get('email') || '') + '">');
+        this.trigger('editing', true);
     }
     confirm() {
         this.clearTip();
@@ -114,14 +128,7 @@ export default class UserView extends Backbone.View<UserModel> implements UserVi
         }, { validate: true });
         // 所有验证通过
         if (!!!this.model.validationError) {
-            this.$el.find('.first-name').html(this.model.get('firstName')  || '--');
-            this.$el.find('.last-name').html(this.model.get('lastName')  || '--');
-            this.$el.find('.sex').html(this.model.get('sex')  || '--');
-            this.$el.find('.birthday').html(this.model.get('birthday') || '--');
-            this.$el.find('.email').html(this.model.get('email')  || '--');
-            this.$el.removeClass('editing');
-            this.$el.find('.edit').show();
-            this.$el.find('.confirm').hide();
+            this.trigger('editing', false);
         }
     }
     delete() {
