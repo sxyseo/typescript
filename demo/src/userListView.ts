@@ -18,7 +18,6 @@ interface UserListViewInterface {
 
 interface UserListViewOptions<T> {
     el: string;
-    events: any;
 }
 
 let json = Mock.mock_json;
@@ -47,7 +46,7 @@ export default class UserListView extends Backbone.View<Backbone.Model> implemen
             tagName: 'li', className: 'user', 
             events: { 'click .edit': 'edit', 'click .del': 'delete', 'click .confirm': 'confirm' }
         });
-        view.render(this.$el.find('ul'));
+        view.render(this.$el);
         userCollection.add(model);
         return view;
     }
@@ -60,13 +59,13 @@ export default class UserListView extends Backbone.View<Backbone.Model> implemen
             className: 'user', 
             events: { 'click .edit': 'edit', 'click .del': 'delete', 'click .confirm': 'confirm' }
         });
-        userView.render(this.$el.find('ul'));
+        userView.render(this.$el);
         userCollection.push(userView.model);
         
         //userRouter.navigate('user/add', {trigger: true});
     }
     render() {
-        this.$el.append( underscore.template('<a href="#user/add" class="add">添加用户</a>')() );
+        
         return this;
     }
 }
