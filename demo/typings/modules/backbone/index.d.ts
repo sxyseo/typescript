@@ -9,7 +9,7 @@ declare module 'backbone' {
 /// <reference types="jquery" />
 
 export = Backbone;
-///export as namespace Backbone;
+//export as namespace Backbone;
 
 import * as _ from 'underscore';
 

@@ -5,7 +5,7 @@ interface UserModelInterface {
     data: UserModelOptions[]
 }
 
-export let mock_json: UserModelInterface = {
+export let mock_json = <UserModelInterface>{
     is_ok: true,
     data: [
         {firstName: 'AR', lastName: 'Insect', email: 'ar.insect@gmail.com', sex: '男'},
