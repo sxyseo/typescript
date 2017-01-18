@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/3dce14b0729090dc0446c499461bbd2af0a81d54/fine-uploader/index.d.ts",
+    "raw": "registry:dt/fine-uploader#5.11.0+20170106152342",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/3dce14b0729090dc0446c499461bbd2af0a81d54/fine-uploader/index.d.ts"
+  }
+}

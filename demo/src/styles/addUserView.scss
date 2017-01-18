@@ -1,0 +1,49 @@
+#add-user{
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    .user-item {
+        padding: 5px 0;
+        em {
+            display: inline-block;
+            margin-right: 5px;
+            width: 100px;
+            text-align: right;
+        }
+        span {
+            display: inline-block;
+            margin: 0 5px;
+        }
+        .error {
+            background: #ddd;
+            border: 2px solid red;
+        }
+        .error-tip {
+            color: red;
+            padding-left: 110px;
+            padding-top: 5px;
+        }
+        .first-name {
+            color: red;
+        }
+        .last-name {
+            color: #333;
+        }
+        .input-email {
+            width: 160px;
+        }
+        &.user-item.oprator {
+            margin-top: 20px;
+            .btn-back {
+                color: #fff;
+                background: gray;
+            }
+            .btn-confirm {
+                color: #fff;
+                background: green;
+            }
+        }
+    }
+
+}

@@ -35,9 +35,6 @@ export default class UserListView extends Backbone.View<Backbone.Model> implemen
             }
         }
         this.render();
-        this.listenTo(userRouter, 'route:addUser', function() {
-               console.log('add user'); 
-        });
     }
     createUserView(data: UserModelOptions): UserView {
         let model: UserModel = new UserModel(data);
@@ -51,7 +48,6 @@ export default class UserListView extends Backbone.View<Backbone.Model> implemen
         return view;
     }
     addUser() {
-       
         let userModel: UserModel = new UserModel({firstName: 'Daisy', email: 'Daisy@163.com'});
         let userView: UserView = new UserView({
             model: userModel, 

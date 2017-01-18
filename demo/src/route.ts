@@ -5,32 +5,20 @@ interface RouterOptions {
 }
 
 class UserRouter extends Backbone.Router {
-    operator(action: string) {
-        console.log(action);
-    }
-    addUser() {
-        console.log('dffsfsddfs');
-        this.trigger('route:addUser');
-    }
-    userDetail(id: number) {
-        console.log(id);
-        this.trigger('route:userDetail');
+    operator(action: string, id: number) {
+        //console.log(action);
+        if ('add' === action) this.trigger('route:addUser');
+        if ('detail' === action && id) this.trigger('route:userDetail');
     }
     constructor(options: RouterOptions) {
         super(options);
     }
 }
 
-// 路由器监听
-Backbone.history.start({
-    //silent: true // 初始化不监听路由
-});
-
 export let userRouter = <Backbone.Router>new UserRouter({
     // 路由配置
     routes: {
         'user/:action': 'operator',
-        'user/detail/:id': 'userDetail'
+        'user/:action/:id': 'operator'
     }
 });
-

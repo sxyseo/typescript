@@ -14,12 +14,11 @@ interface AddUserViewInterface {
 
 interface AddUserViewOptions<UM> {
     model: UM;
-    tagName: string;
-    className: string;
+    el: string;
     events: any;
 }
 
-export default class AddUserView extends Backbone.View<UserModel> implements AddUserViewInterface {
+class AddUserView extends Backbone.View<UserModel> implements AddUserViewInterface {
     model: UserModel;
     template: any;
     constructor(options: AddUserViewOptions<UserModel>) {
@@ -29,32 +28,36 @@ export default class AddUserView extends Backbone.View<UserModel> implements Add
         let tpl: string[] = [
             '<div class="user-item">',
                 '<em>用户名：' + '</em>',
-                '<span class="first-name"><%=firstName%></span>',
-                '<span class="last-name"><%=lastName%></span>',
+                '<span class="first-name"><input type="text" /></span>',
+                '<span class="last-name"><input type="text" /></span>',
                 '<p class="error-tip"></p>',
             '</div>',
             '<div class="user-item">',
                 '<em>性别：</em>',
-                '<span class="sex"><%=sex%></span>',
+                '<span class="sex"><input type="text" /></span>',
                 '<p class="error-tip"></p>', 
             '</div>',
             '<div class="user-item">',
                 '<em>生日：</em>',
-                '<span class="birthday"><%=birthday%></span>',
+                '<span class="birthday"><input type="text" /></span>',
                 '<p class="error-tip"></p>', 
             '</div>',
             '<div class="user-item">', 
                 '<em>邮箱：</em>',
-                '<span class="email"><%=email%></span>', 
+                '<span class="email"><input class="input-email" type="text" /></span>', 
                 '<p class="error-tip"></p>', 
             '</div>',
             '<div class="user-item oprator">', 
-                '<a class="button edit" href="#">编辑</a>',
-                '<a class="button confirm" style="display:none" href="#">确认</a>',
-                '<a class="button del" href="#">删除</a>', 
+                '<a href="#" class="button btn-confirm">确认添加</a>',
+                '<a href="#" class="button btn-back">返回用户列表</a>',
             '</div>'
         ];
-        
+        // 初始化先定义好模板对象
+        this.template = underscore.template(tpl.join(''));
+        // 用户模型需要绑定数据验证，保证在set之前调用
+        this.model.on('invalid', (model: UserModel, error: string[]) => {
+            this.onValidate(error);
+        });
     }
     onValidate(error: string[]) {
         
@@ -65,11 +68,20 @@ export default class AddUserView extends Backbone.View<UserModel> implements Add
     onErrorTip(message: string) {
         
     }
-    render(userList?: any) {
-        
+    render() {
+        this.$el.html(this.template());
         return this;
     }
     confirm() {
         
     }
+    goback() {
+
+    }
 }
+
+export default new AddUserView({
+    model: new UserModel({ firstName: '', email: '' }),
+    el: '#add-user',
+    events: {}
+});

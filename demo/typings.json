@@ -1,5 +1,7 @@
 {
   "globalDependencies": {
+    "es6-shim": "registry:dt/es6-shim#0.31.2+20160726072212",
+    "fine-uploader": "registry:dt/fine-uploader#5.11.0+20170106152342",
     "jquery": "registry:dt/jquery#1.10.0+20160417213236",
     "require": "registry:dt/require#2.1.20+20160919185614",
     "underscore": "registry:dt/underscore#1.8.3+20161123125004"
