@@ -47,7 +47,7 @@ export default class UserListView extends Backbone.View<Backbone.Model> implemen
         return view;
     }
     addUser(model: any) {
-        console.log(model);
+        // console.log(model);
         let userView: UserView = new UserView({
             model: model, 
             tagName: 'li', 
