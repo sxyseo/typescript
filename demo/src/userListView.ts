@@ -12,7 +12,6 @@ import { userRouter } from './route';
 import './styles/userListView.scss';
 
 interface UserListViewInterface {
-    addUser(): void;
     render(): Backbone.View<UserModel>;
 }
 
@@ -47,21 +46,18 @@ export default class UserListView extends Backbone.View<Backbone.Model> implemen
         userCollection.add(model);
         return view;
     }
-    addUser() {
-        let userModel: UserModel = new UserModel({firstName: 'Daisy', email: 'Daisy@163.com'});
+    addUser(model: any) {
+        console.log(model);
         let userView: UserView = new UserView({
-            model: userModel, 
+            model: model, 
             tagName: 'li', 
             className: 'user', 
             events: { 'click .edit': 'edit', 'click .del': 'delete', 'click .confirm': 'confirm' }
         });
         userView.render(this.$el);
-        userCollection.push(userView.model);
-        
-        //userRouter.navigate('user/add', {trigger: true});
+        userCollection.add(model);
     }
     render() {
-        
         return this;
     }
 }

@@ -18,7 +18,7 @@ interface AddUserViewOptions<UM> {
     events: any;
 }
 
-class AddUserView extends Backbone.View<UserModel> implements AddUserViewInterface {
+export default class AddUserView extends Backbone.View<UserModel> implements AddUserViewInterface {
     model: UserModel;
     template: any;
     constructor(options: AddUserViewOptions<UserModel>) {
@@ -60,28 +60,41 @@ class AddUserView extends Backbone.View<UserModel> implements AddUserViewInterfa
         });
     }
     onValidate(error: string[]) {
-        
+        while (error.length) {
+            let curMessage: string = error.shift();
+            this.onErrorTip(curMessage);
+        }
     }
     clearTip() {
-        
+        this.$el.find('.error-tip').html('');
+        this.$el.find('input').removeClass('error');
     }
     onErrorTip(message: string) {
-        
+        if (message.indexOf('first name') > -1) {
+            this.$el.find('.first-name').siblings('.error-tip').html(message);
+            this.$el.find('.first-name input').addClass('error');
+        }
+        if (message.indexOf('email') > -1) {
+            this.$el.find('.email').siblings('.error-tip').html(message);
+            this.$el.find('.email input').addClass('error');
+        }
     }
     render() {
         this.$el.html(this.template());
         return this;
     }
     confirm() {
-        
-    }
-    goback() {
-
+        this.model.set({
+            firstName: this.$el.find('.first-name input').val(),
+            lastName: this.$el.find('.last-name  input').val(),
+            sex: this.$el.find('.sex  input').val(),
+            birthday: this.$el.find('.birthday  input').val(),
+            email: this.$el.find('.email input').val()
+        }, { validate: true });
+        // 所有验证通过
+        if (!!!this.model.validationError) {
+            this.trigger('addUserComplete', this.model);
+            window.location.hash = '#';
+        }
     }
 }
-
-export default new AddUserView({
-    model: new UserModel({ firstName: '', email: '' }),
-    el: '#add-user',
-    events: {}
-});
