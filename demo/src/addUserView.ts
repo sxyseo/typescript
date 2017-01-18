@@ -48,7 +48,7 @@ class AddUserView extends Backbone.View<UserModel> implements AddUserViewInterfa
                 '<p class="error-tip"></p>', 
             '</div>',
             '<div class="user-item oprator">', 
-                '<a href="#" class="button btn-confirm">确认添加</a>',
+                '<button class="button btn-confirm">确认添加</button>',
                 '<a href="#" class="button btn-back">返回用户列表</a>',
             '</div>'
         ];

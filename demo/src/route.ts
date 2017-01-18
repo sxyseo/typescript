@@ -6,7 +6,7 @@ interface RouterOptions {
 
 class UserRouter extends Backbone.Router {
     operator(action: string, id: number) {
-        //console.log(action);
+        if (null === action) this.trigger('route:index');
         if ('add' === action) this.trigger('route:addUser');
         if ('detail' === action && id) this.trigger('route:userDetail');
     }
@@ -18,6 +18,7 @@ class UserRouter extends Backbone.Router {
 export let userRouter = <Backbone.Router>new UserRouter({
     // 路由配置
     routes: {
+        '': 'operator',
         'user/:action': 'operator',
         'user/:action/:id': 'operator'
     }
