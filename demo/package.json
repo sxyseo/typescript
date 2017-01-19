@@ -81,7 +81,7 @@
     "ts-helpers": "~1.1.1",
     "ts-loader": "^0.8.2",
     "tslint": "~3.14.0",
-    "typescript": "~1.8.10",
+    "typescript": "~2.2.0-dev.20170118",
     "typings": "~1.3.2",
     "webpack": "~1.13.1",
     "webpack-dev-server": "~1.14.1",

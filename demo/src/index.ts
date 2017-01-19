@@ -6,3 +6,5 @@ new UserMain({
     el: '#user-main',
     events: {'click .add': 'addUser'}
 });
+
+

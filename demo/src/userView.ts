@@ -64,7 +64,7 @@ export default class UserView extends Backbone.View<UserModel> implements UserVi
     }
     onValidate(error: string[]) {
         while (error.length) {
-            let curMessage: string = error.shift();
+            let curMessage: string | null = <string>error.shift();
             this.onErrorTip(curMessage);
         }
     }

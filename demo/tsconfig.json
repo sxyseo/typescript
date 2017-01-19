@@ -4,6 +4,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "module": "commonjs",
+        "strictNullChecks": true,
         "noImplicitAny": true,
 //        "noEmitHelpers": true,
 //        "removeComments": true,
