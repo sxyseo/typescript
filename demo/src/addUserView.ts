@@ -4,7 +4,7 @@ import Backbone = require('backbone');
 
 import UserModel from './userModel';
 import userCollection from './userCollection';
-
+let QQUploaderFile = require('fine-uploader');
 import './styles/addUserView.scss';
 
 interface AddUserViewInterface {
@@ -17,6 +17,23 @@ interface AddUserViewOptions<UM> {
     el: string;
     events: any;
 }
+
+var galleryUploader = new QQUploaderFile.FineUploader({
+    element: document.getElementById('fine-uploader-gallery'),
+    template: 'qq-template-gallery',
+    request: {
+        endpoint: '/server/uploads'
+    },
+    thumbnails: {
+        placeholders: {
+            //waitingPath: '/source/placeholders/waiting-generic.png',
+            //notAvailablePath: '/source/placeholders/not_available-generic.png'
+        }
+    },
+    validation: {
+        allowedExtensions: ['jpeg', 'jpg', 'gif', 'png']
+    }
+});
 
 export default class AddUserView extends Backbone.View<UserModel> implements AddUserViewInterface {
     model: UserModel;
