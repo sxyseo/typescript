@@ -18,21 +18,27 @@ interface AddUserViewOptions<UM> {
     events: any;
 }
 
-var galleryUploader = new QQUploaderFile.FineUploader({
-    element: document.getElementById('fine-uploader-gallery'),
-    template: 'qq-template-gallery',
+var manualUploader = new QQUploaderFile.FineUploader({
+    element: document.getElementById('fine-uploader-manual-trigger'),
+    template: 'qq-template-manual-trigger',
     request: {
-        endpoint: '/server/uploads'
+        endpoint: 'http://localhost:3300/upload'
     },
     thumbnails: {
         placeholders: {
-            //waitingPath: '/source/placeholders/waiting-generic.png',
-            //notAvailablePath: '/source/placeholders/not_available-generic.png'
+           // waitingPath: '/source/placeholders/waiting-generic.png',
+           // notAvailablePath: '/source/placeholders/not_available-generic.png'
         }
     },
     validation: {
         allowedExtensions: ['jpeg', 'jpg', 'gif', 'png']
-    }
+    },
+    autoUpload: false,
+    debug: true
+});
+
+QQUploaderFile(document.getElementById("trigger-upload")).attach("click", function() {
+    manualUploader.uploadStoredFiles();
 });
 
 export default class AddUserView extends Backbone.View<UserModel> implements AddUserViewInterface {
@@ -101,6 +107,7 @@ export default class AddUserView extends Backbone.View<UserModel> implements Add
         return this;
     }
     confirm() {
+        this.clearTip();
         this.model.set({
             firstName: this.$el.find('.first-name input').val(),
             lastName: this.$el.find('.last-name  input').val(),

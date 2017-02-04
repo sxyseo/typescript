@@ -45,14 +45,14 @@ export default class UserMain extends Backbone.View<UserMainModel> {
         this.$el.find('.btn-add').show();
         this.$el.find('#add-user').hide();
         // 隐藏上传
-        $$('#fine-uploader-gallery').hide();
+        $$('#fine-uploader-manual-trigger').hide();
     }
     addUser() {
         this.$el.find('#user-list').hide();
         this.$el.find('.btn-add').hide();
         this.$el.find('#add-user').show();
         // 打开上传
-        $$('#fine-uploader-gallery').show();
+        $$('#fine-uploader-manual-trigger').show();
         this.addUserView.render();
     }
 }
