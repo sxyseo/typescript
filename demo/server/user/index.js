@@ -6,5 +6,11 @@ exports.index = function (req, res) {
 };
 
 exports.upload = function (req, res) {
+    console.log(req.body, req.files);
     res.send({"success": true});
+};
+
+exports.uploadDelete = function (req, res) {
+    console.log(req.body, req.files);
+    
 };

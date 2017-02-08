@@ -22,7 +22,20 @@ var manualUploader = new QQUploaderFile.FineUploader({
     element: document.getElementById('fine-uploader-manual-trigger'),
     template: 'qq-template-manual-trigger',
     request: {
-        endpoint: 'http://localhost:3300/upload'
+        endpoint: 'http://localhost:3300/upload',
+        accessKey: "AKIAJB6BSMFWTAXC5M2Q"
+    },
+    uploadSuccess: {
+        endpoint: "http://localhost:3300/uploadDelete?success",
+        params: {
+            isBrowserPreviewCapable: QQUploaderFile.supportedFeatures.imagePreviews
+        }
+    },
+
+    deleteFile: {
+        enabled: true,
+        method: "POST",
+        endpoint: "http://localhost:3300/uploadDelete"
     },
     thumbnails: {
         placeholders: {
@@ -31,7 +44,9 @@ var manualUploader = new QQUploaderFile.FineUploader({
         }
     },
     validation: {
-        allowedExtensions: ['jpeg', 'jpg', 'gif', 'png']
+        itemLimit: 5,
+        sizeLimit: 15000000,
+        allowedExtensions: ['jpeg', 'jpg', 'gif', 'png', 'zip']
     },
     autoUpload: false,
     debug: true
